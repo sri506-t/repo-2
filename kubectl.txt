@@ -1,0 +1,31 @@
+kubectl installation
+======================
+curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+mv ./kubectl /usr/local/bin 
+kubectl version --short --client
+
+
+eksctl installation
+=======================
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+eksctl version
+
+
+
+eksctl create cluster --name my-cluster --region us-east-1 --without-nodegroup
+
+https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html - link for iam
+
+
+eksctl create nodegroup \
+  --cluster my-cluster \
+  --region us-east-1 \
+  --name mynodes \
+  --node-type t2.micro \
+  --nodes 3 \
+  --nodes-min 2 \
+  --nodes-max 4 \
+  --ssh-access \
+  --ssh-public-key jenkinssep15
